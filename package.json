@@ -37,8 +37,8 @@
   },
   "homepage": "https://github.com/pgte/simple-redis-safe-work-queue",
   "dependencies": {
+    "ioredis": "^4.14.1",
     "json-stringify-safe": "^5.0.0",
-    "redis": "^2.5.3",
     "uuid": "^3.0.0",
     "xtend": "^4.0.0"
   },

@@ -2,7 +2,7 @@ var defaultOptions = require('./default_watchdog_options');
 var EventEmitter = require('events').EventEmitter;
 var scripts = require('./scripts');
 var extend = require('xtend');
-var Redis = require('redis');
+var Redis = require('ioredis');
 
 module.exports = createWatchdog;
 
@@ -32,7 +32,7 @@ function createWatchdog(queueName, options) {
   /// Init
 
   function init() {
-    options.client = Redis.createClient(options.port, options.host, options.redisOptions);
+    options.client = new Redis(options.port, options.host, options.redisOptions);
     if (options.password) options.client.auth(options.password);
     options.client.once('ready', onReady);
     options.client.on('error', errorIfError);

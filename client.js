@@ -3,7 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var stringify = require('json-stringify-safe');
 var uuid = require('uuid').v4;
 var extend = require('xtend');
-var Redis = require('redis');
+var Redis = require('ioredis');
 
 module.exports = createClient;
 
@@ -33,7 +33,7 @@ function createClient(queueName, options) {
   /// Init
 
   function init() {
-    options.client = Redis.createClient(options.port, options.host, options.redisOptions);
+    options.client = new Redis(options.port, options.host, options.redisOptions);
     if (options.password) options.client.auth(options.password);
     options.client.once('ready', onReady);
 
